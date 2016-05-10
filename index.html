@@ -6,27 +6,104 @@
 			body {
 				margin: 0;
 				padding: 0;
+				font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+				font-weight: 300;
+				text-shadow: 0 0 10px black;
+				text-align: center;
 			}
 			
-			div {
+			div.image {
 				position: absolute;
 				top: 0;
 				bottom: 0;
 				width: 50%;
+				background-size: cover;
+				background-position: center center;
 			}
 			
-			div#left {
+			div.title {
+				position: absolute;
+				z-index: 1;
+				width: 50%;
+				font-size: 5em;
+				bottom: 25%;
+				color: white;
+			}
+			
+			div.image#left_image,
+			div.title#left_title {
 				left: 0;
 			}
 			
-			div#right {
+			div.image#right_image,
+			div.title#right_title {
 				right: 0;
 			}
 			
+			a {
+				color: white;
+				text-decoration: none;
+				display: block;
+				position: absolute;
+				bottom: 1em;
+				left: 0;
+				right: 0;
+				font-size: 2em;
+			}
+			
+			a:hover {
+				text-decoration: underline;
+			}
+			
 		</style>
+		
 	</head>
 	<body>
-		<div id="left"></div>
-		<div id="right"></div>
+		<div class="title" id="left_title"></div>
+		<div class="image" id="left_image"></div>
+		<div class="title" id="right_title"></div>
+		<div class="image" id="right_image"></div>
+		<a href="javascript:window.location.reload();">try again</a>
+		
+		
+		<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+		<script type="text/javascript">
+			$(function() {
+				
+				var data = [
+					{
+						'left_title': 'left',
+						'left_image': 'https://farm1.staticflickr.com/75/160325130_3cd3fcbd2e_b.jpg',
+						'right_title': 'right',
+						'right_image': 'https://farm2.staticflickr.com/1139/1349761097_77ac9e1e2b_b.jpg',
+					},
+					{
+						'left_title': 'top',
+						'left_image': 'https://farm8.staticflickr.com/7441/16452897765_58fbc3f518_b.jpg',
+						'right_title': 'bottom',
+						'right_image': 'https://farm1.staticflickr.com/182/473913568_b10974095c_b.jpg',
+					},
+					{
+						'left_title': 'home',
+						'left_image': 'https://farm4.staticflickr.com/3195/2699047570_23af819ba4_b.jpg',
+						'right_title': 'away',
+						'right_image': 'https://farm9.staticflickr.com/8573/16492231037_ee28a6c9e1_b.jpg',
+					}
+				];
+				
+				var index = Math.floor(Math.random() * data.length);
+				var flipValues = Math.floor(Math.random() * 2);
+				var item = data[index];
+				
+				var leftTitle = flipValues ? item["left_title"] : item["right_title"];
+				var rightTitle = flipValues ? item["right_title"] : item["left_title"];
+				
+				$("#left_title").text(leftTitle);
+				$("#right_title").text(rightTitle);
+				$("#left_image").css("background-image", "url(" + item["left_image"] + ")");
+				$("#right_image").css("background-image", "url(" + item["right_image"] + ")");
+			});
+		</script>
+		
 	</body>
 </html>
